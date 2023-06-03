@@ -15,9 +15,11 @@ class _InitialPageState extends State<InitialPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _handleNavigate();
   }
 
   _handleNavigate() async {
+    print('Hellr');
     bool _is_logined = await checkLoginStatus(context);
     if (_is_logined) {
       Navigator.push(
