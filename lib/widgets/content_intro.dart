@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:house_rent/models/house.dart';
+import 'package:house_rent/utils/functions.dart';
 
 class ContentIntro extends StatelessWidget {
   final House house;
@@ -33,7 +34,7 @@ class ContentIntro extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Text(
-            '500 sqft',
+            '${house.sq_feet} sqft',
             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                   fontSize: 14,
                 ),
@@ -43,14 +44,14 @@ class ContentIntro extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: '\$4455',
+                  text: formattedMoney(house.price),
                   style: Theme.of(context).textTheme.headline1!.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                 ),
                 TextSpan(
-                  text: ' Fer Month',
+                  text: ' Per Semester',
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         fontSize: 14,
                       ),

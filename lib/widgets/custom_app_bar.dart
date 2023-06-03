@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:house_rent/screens/profile/profile.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({Key? key}) : super(key: key);
+  Function getUserData;
+  CustomAppBar({Key? key, required this.getUserData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    _handleNavigateToProfile() {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => Profile(getUserData: getUserData),
+        ),
+      );
+    }
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -16,8 +26,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: () {},
               icon: SvgPicture.asset('assets/icons/menu.svg'),
             ),
-            const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/avatar.jpeg'),
+            InkWell(
+              onTap: _handleNavigateToProfile,
+              child: const CircleAvatar(
+                backgroundImage: AssetImage('assets/images/astronout.png'),
+              ),
             ),
           ],
         ),

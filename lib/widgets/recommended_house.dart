@@ -1,13 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:house_rent/models/house.dart';
 import 'package:house_rent/screens/details/details.dart';
 import 'package:house_rent/widgets/circle_icon_button.dart';
 
-class RecommendedHouse extends StatelessWidget {
-  final recommendedList = House.generateRecommended();
+class RecommendedHouse extends StatefulWidget {
+  final List<House> house_list;
+  const RecommendedHouse({Key? key, required this.house_list})
+      : super(key: key);
 
-  RecommendedHouse({Key? key}) : super(key: key);
+  @override
+  State<RecommendedHouse> createState() => _RecommendedHouseState();
+}
+
+class _RecommendedHouseState extends State<RecommendedHouse> {
+  final recommendedList = House.generateRecommended();
 
   _handleNavigateToDetails(BuildContext context, House house) {
     Navigator.of(context).push(
@@ -27,7 +35,7 @@ class RecommendedHouse extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => GestureDetector(
             onTap: () =>
-                _handleNavigateToDetails(context, recommendedList[index]),
+                _handleNavigateToDetails(context, widget.house_list[index]),
             child: Container(
               height: 300,
               width: 230,
@@ -41,9 +49,8 @@ class RecommendedHouse extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(
-                          recommendedList[index].imageUrl,
-                        ),
+                        image: CachedNetworkImageProvider(
+                            widget.house_list[index].imageUrl),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -70,7 +77,7 @@ class RecommendedHouse extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                recommendedList[index].name,
+                                widget.house_list[index].name,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline1!
@@ -81,7 +88,7 @@ class RecommendedHouse extends StatelessWidget {
                               ),
                               const SizedBox(height: 5),
                               Text(
-                                recommendedList[index].address,
+                                widget.house_list[index].address,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyText1!
@@ -104,7 +111,7 @@ class RecommendedHouse extends StatelessWidget {
             ),
           ),
           separatorBuilder: (_, index) => const SizedBox(width: 20),
-          itemCount: recommendedList.length,
+          itemCount: widget.house_list.length,
         ),
       ),
     );
