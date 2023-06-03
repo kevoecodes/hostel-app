@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:house_rent/screens/auth/request_otp.dart';
-import 'package:house_rent/screens/home/home.dart';
-
-import 'package:house_rent/utils/size_config.dart';
+import 'package:house_rent/screens/home/intial.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +16,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -48,7 +44,7 @@ class _MyAppState extends State<MyApp> {
               headline6: TextStyle(color: Color(0XFF8B8B8B), fontSize: 18),
             ).headline6,
           )),
-      home: const Home(),
+      home: const InitialPage(),
     );
   }
 }
