@@ -150,7 +150,7 @@ class _HomeState extends State<Home> {
                   : house_list!.length > 0
                       ? Column(
                           children: [
-                            const Categories(),
+                            // const Categories(),
                             RecommendedHouse(
                               userData: userData,
                               house_list: house_list!,

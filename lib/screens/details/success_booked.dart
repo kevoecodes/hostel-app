@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:house_rent/screens/bookmarks/booked.dart';
 import 'package:house_rent/screens/home/home.dart';
 import 'package:house_rent/utils/size_config.dart';
 import 'package:house_rent/widgets/custom_buttons.dart';
@@ -39,8 +40,10 @@ class _SuccessfullBookedState extends State<SuccessfullBooked> {
               isLoading: false,
               text: 'See more',
               press: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Home()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BookedList()));
               },
             ),
           ),

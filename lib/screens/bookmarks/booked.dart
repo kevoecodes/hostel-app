@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:house_rent/models/booked_hostel.dart';
 import 'package:house_rent/models/house.dart';
+import 'package:house_rent/screens/home/home.dart';
 import 'package:house_rent/utils/api.dart';
 import 'package:house_rent/utils/size_config.dart';
 import 'package:house_rent/widgets/hostel_list.dart';
@@ -60,6 +61,11 @@ class _BookedListState extends State<BookedList> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Booked Hostels'),
+        leading: IconButton(
+          icon: Icon(Icons.chevron_left),
+          onPressed: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const Home())),
+        ),
       ),
       body: RefreshIndicator(
           onRefresh: () async {
