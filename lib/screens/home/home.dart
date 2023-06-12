@@ -134,7 +134,9 @@ class _HomeState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               WelcomeText(userData: userData),
-              const SearchInput(),
+              SearchInput(
+                userData: userData,
+              ),
               house_list == null
                   ? Center(
                       child: InkWell(

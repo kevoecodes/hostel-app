@@ -59,13 +59,13 @@ class _LoginFormState extends State<LoginForm> {
                   return null;
                 },
                 decoration: InputDecoration(
-                  labelText: 'Username',
-                  hintText: 'eg. john',
+                  labelText: 'Email',
+                  hintText: 'eg. example@example.com',
                   // If  you are using latest version of flutter then lable text and hint text shown like this
                   // if you r using flutter less then 1.20.* then maybe this is not working properly
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   suffixIcon:
-                      CustomSurffixIcon(svgIcon: "assets/icons/user_icon.svg"),
+                      CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
                   contentPadding: const EdgeInsets.all(12.0),
                   border: new OutlineInputBorder(
                       borderSide: new BorderSide(

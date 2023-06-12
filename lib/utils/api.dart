@@ -90,7 +90,7 @@ class CallApi {
       return null;
     } else if (res.statusCode == 401) {
       if (login) {
-        showSnack(context, 'Invalid OTP');
+        showSnack(context, 'Invalid credentials');
       } else {
         _navigateHome(context: context);
       }
