@@ -7,7 +7,8 @@ import 'package:house_rent/widgets/circle_icon_button.dart';
 
 class RecommendedHouse extends StatefulWidget {
   final List<House> house_list;
-  const RecommendedHouse({Key? key, required this.house_list})
+  var userData;
+  RecommendedHouse({Key? key, required this.house_list, required this.userData})
       : super(key: key);
 
   @override
@@ -20,7 +21,10 @@ class _RecommendedHouseState extends State<RecommendedHouse> {
   _handleNavigateToDetails(BuildContext context, House house) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => Details(house: house),
+        builder: (context) => Details(
+          house: house,
+          userData: widget.userData,
+        ),
       ),
     );
   }

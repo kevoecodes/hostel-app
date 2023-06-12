@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:house_rent/models/house.dart';
+import 'package:house_rent/screens/details/success_booked.dart';
+import 'package:house_rent/utils/api.dart';
+import 'package:house_rent/utils/snackbar.dart';
 import 'package:house_rent/widgets/about.dart';
 import 'package:house_rent/widgets/content_intro.dart';
 import 'package:house_rent/widgets/details_app_bar.dart';
@@ -8,10 +10,9 @@ import 'package:house_rent/widgets/house_info.dart';
 
 class Details extends StatelessWidget {
   final House house;
-  const Details({
-    Key? key,
-    required this.house,
-  }) : super(key: key);
+  var userData;
+  Details({Key? key, required this.house, required this.userData})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,9 @@ class Details extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _book_now(context);
+                },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -56,5 +59,19 @@ class Details extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _book_now(BuildContext context) {
+    var data = {'user': userData['id'].toString(), 'hostel': house.id};
+    var res = CallApi().authenticatedPostRequest(data, 'api/v1/hostel-booked');
+    if (res != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const SuccessfullBooked(),
+        ),
+      );
+    } else {
+      showSnack(context, 'Failed to book this hostel');
+    }
   }
 }

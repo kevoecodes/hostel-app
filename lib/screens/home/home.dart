@@ -1,9 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:house_rent/models/house.dart';
 import 'package:house_rent/utils/api.dart';
 import 'package:house_rent/utils/functions.dart';
+import 'package:house_rent/utils/size_config.dart';
 import 'package:house_rent/widgets/recommended_house.dart';
 import 'package:house_rent/widgets/custom_app_bar.dart';
 import 'package:house_rent/widgets/search_input.dart';
@@ -19,13 +19,10 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 
   static void getUserInfo(BuildContext context) {
-    print('EDITING ININTIAL');
     _HomeState? state = context.findAncestorStateOfType<_HomeState>();
     if (state != null) {
-      print('STATE IS NOT NULL');
       state.getUserInfo();
     }
-    print('STATE IS NULL');
   }
 }
 
@@ -43,9 +40,7 @@ class _HomeState extends State<Home> {
   }
 
   void getUserInfo() async {
-    print('Getting user');
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    print('Leveeve');
     var userJson = localStorage.getString('user');
     var user = json.decode(userJson!);
     setState(() {
@@ -75,6 +70,7 @@ class _HomeState extends State<Home> {
       List<House> _houses_list = [];
       for (var i in houses) {
         _houses_list.add(House(
+            i['id'].toString(),
             i['name'],
             i['location'],
             i['cover_image'],
@@ -103,6 +99,7 @@ class _HomeState extends State<Home> {
       List<House> _houses_list = [];
       for (var i in houses) {
         _houses_list.add(House(
+            i['id'].toString(),
             i['name'],
             i['location'],
             i['cover_image'],
@@ -155,14 +152,27 @@ class _HomeState extends State<Home> {
                           children: [
                             const Categories(),
                             RecommendedHouse(
+                              userData: userData,
                               house_list: house_list!,
                             ),
                             BestOffer(
+                              userData: userData,
                               house_list: best_deal_houses!,
                             ),
                           ],
                         )
-                      : Text('No data')
+                      : Center(
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                "assets/images/no_data.gif",
+                                height: SizeConfig.screenHeight * 0.4, //40%
+                                width: SizeConfig.screenWidth,
+                              ),
+                              const Text('No data')
+                            ],
+                          ),
+                        )
             ],
           ),
         ),

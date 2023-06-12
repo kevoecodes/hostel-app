@@ -8,7 +8,9 @@ import 'package:house_rent/widgets/circle_icon_button.dart';
 
 class BestOffer extends StatefulWidget {
   List<House> house_list;
-  BestOffer({Key? key, required this.house_list}) : super(key: key);
+  var userData;
+  BestOffer({Key? key, required this.house_list, required this.userData})
+      : super(key: key);
 
   @override
   State<BestOffer> createState() => _BestOfferState();
@@ -22,7 +24,10 @@ class _BestOfferState extends State<BestOffer> {
     _handleNavigateToDetails(BuildContext context, House house) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => Details(house: house),
+          builder: (context) => Details(
+            house: house,
+            userData: widget.userData,
+          ),
         ),
       );
     }

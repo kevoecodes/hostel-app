@@ -19,7 +19,6 @@ class _InitialPageState extends State<InitialPage> {
   }
 
   _handleNavigate() async {
-    print('Hellr');
     bool _is_logined = await checkLoginStatus(context);
     if (_is_logined) {
       Navigator.push(

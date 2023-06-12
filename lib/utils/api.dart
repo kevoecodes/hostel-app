@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:house_rent/screens/auth/login.dart';
 import 'package:house_rent/screens/auth/request_otp.dart';
 import 'package:house_rent/utils/snackbar.dart';
 import 'package:http/http.dart' as http;
@@ -8,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CallApi {
   // static final String url = 'https://gnmcargo.com/cargo/';
   // static final String media_url = 'https://gnmcargo.com/streamer/v1/';
-  static const String url = 'http://192.168.100.92:3500/';
-  // static final String url = 'http://137.184.37.5:8000/cargo/';
+  // static const String url = 'http://192.168.100.92:3500/';
+  static final String url = 'http://161.35.210.153:8500/';
   static const String media_url = 'http://192.168.100.92:5000/streamer/v1/';
   var token = '';
 
@@ -57,7 +58,7 @@ class CallApi {
       try {
         showSnack(context, 'No network');
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const RequestOTP()));
+            MaterialPageRoute(builder: (context) => const LoginPage()));
       } catch (e) {}
     }
   }

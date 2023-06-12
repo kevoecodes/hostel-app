@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:house_rent/screens/auth/login.dart';
 import 'package:house_rent/screens/auth/request_otp.dart';
 import 'package:house_rent/screens/home/home.dart';
 import 'package:house_rent/screens/profile/edit_proflie.dart';
@@ -56,7 +57,7 @@ class _ProfileState extends State<Profile> {
                 ProfilePic(),
                 SizedBox(height: 20),
                 Text(
-                  userData != null ? userData['full_name'] : '',
+                  userData != null ? userData['full_name'].toString() : '',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Text(userData != null ? userData['email'] : ''),
@@ -109,7 +110,7 @@ class _ProfileState extends State<Profile> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const RequestOTP()));
+                                builder: (context) => const LoginPage()));
                       },
                     ).show();
                   },
