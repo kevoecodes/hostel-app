@@ -384,7 +384,8 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
         _isLoading = false;
         // _not_found = true;
       });
-      showSnack(context, 'No network!');
+      showSnack(
+          context, 'Invalid data, please check the credentials provided!');
     } else {
       if (res.statusCode == 200) {
         print(res.body);
