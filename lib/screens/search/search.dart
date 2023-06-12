@@ -17,11 +17,15 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   List<House>? searched_hostels;
+  bool searching = false;
   onSubmut(String value) {
     searchAction(value);
   }
 
   searchAction(String value) async {
+    setState(() {
+      searching = true;
+    });
     var res = await CallApi().authenticatedGetRequest(
         'api/v1/hostels-list/?search=' + value.toString(),
         context: context);
@@ -46,6 +50,7 @@ class _SearchPageState extends State<SearchPage> {
       }
       setState(() {
         searched_hostels = _houses_list;
+        searching = false;
       });
     }
   }
@@ -53,13 +58,14 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: MySearchField(onSubmit: onSubmut),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Column(
               children: [
-                searched_hostels == null
+                searched_hostels == null || searching
                     ? Center(
                         child: InkWell(
                           onTap: () {
@@ -75,6 +81,7 @@ class _SearchPageState extends State<SearchPage> {
                         ? BestOffer(
                             house_list: searched_hostels!,
                             userData: widget.userData,
+                            show: false,
                           )
                         : Center(
                             child: Column(
